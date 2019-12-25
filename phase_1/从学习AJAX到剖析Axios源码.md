@@ -6,7 +6,9 @@ AJAX 的全称是 Asynchronous JavaScript and XML，概括的说就是用 JavaSc
 
 我们知道 web 运作原理是一次 HTTP 请求对应一个页面，那么问题来了，AJAX 是怎么做到一次HTTP 请求还留在了当前页面。
 
-![](http://img.janggwa.cn/sikaoyixia.jpg)
+<div style="text-align: center; margin: 40px 0">
+    <img src="http://img.janggwa.cn/sikaoyixia.jpg" />
+</div>
 
 其实 AJAX 就是用 JavaScript 去发送这个请求，接收到数据后再用 JavaScript 去更新页面，所以AJAX 能够做到 HTTP 请求还停留在当前页面。
 
@@ -46,7 +48,9 @@ AJAX 的全称是 Asynchronous JavaScript and XML，概括的说就是用 JavaSc
 
 如果是的，别急，请你告诉我 GET 请求和 POST 请求的区别是什么？
 
-![](http://img.janggwa.cn/zhetitaijiandanle.jpg)
+<div style="text-align: center; margin: 40px 0">
+    <img src="http://img.janggwa.cn/zhetitaijiandanle.jpg" />
+</div>
 
 - GET 在浏览器回退时是无害的，而 POST 会再次提交请求。
 - GET 产生的 URL 地址可以被 Bookmark，而 POST 不可以。
@@ -70,10 +74,17 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
 
 说到这里，如果你还是一如既往的胸有成竹，那只能说在下佩服。
 
-![](http://img.janggwa.cn/zaixiapeifu.jpg)
+<div style="text-align: center; margin: 40px 0">
+    <img src="http://img.janggwa.cn/zaixiapeifu.jpg" />
+</div>
+
 ================================================================================================
 好了，简单学习了 AJAX 后，我们正经剖析一下项目中经常用到的 Axios 源码。
-![](http://img.janggwa.cn/zhengjing.gif)
+
+<div style="text-align: center; margin: 40px 0">
+    <img src="http://img.janggwa.cn/zhengjing.gif" />
+</div>
+
 先看一下 Axios 源码目录结构
 ```
   lib
@@ -512,4 +523,6 @@ dispatchRequest 文件中可以看到最后调用了 adapter 方法，这边的 
 
 从 AJAX 学习到探索 Axios 源码的过程还是有非常多的乐趣和成长的，希望你们也有所收获，感谢阅读我的文章！
 
-![](http://img.janggwa.cn/xiexie.gif)
+<div style="text-align: center; margin: 40px 0">
+    <img src="http://img.janggwa.cn/xiexie.jpg" />
+</div>
