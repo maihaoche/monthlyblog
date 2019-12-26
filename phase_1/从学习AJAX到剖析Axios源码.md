@@ -78,7 +78,7 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
     <img src="http://img.janggwa.cn/zaixiapeifu.jpg" />
 </div>
 
-================================================================================================
+---
 好了，简单学习了 AJAX 后，我们正经剖析一下项目中经常用到的 Axios 源码。
 
 <div style="text-align: center; margin: 40px 0">
@@ -526,3 +526,4 @@ dispatchRequest 文件中可以看到最后调用了 adapter 方法，这边的 
 <div style="text-align: center; margin: 40px 0">
     <img src="http://img.janggwa.cn/xiexie.jpg" />
 </div>
+
