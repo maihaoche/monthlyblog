@@ -52,7 +52,7 @@ fly-helper
 ###  配置 tsconfig.json
 
 ```json
-# tsconfig.json
+/*  tsconfig.json */
 {
   "compilerOptions": {
     /* 基础配置 */
@@ -138,7 +138,7 @@ The file must be included in at least one of the projects provided.eslint
 ### 配置 tsconfig.eslint.json
 
 ```json
-# tsconfig.eslint.json
+/* tsconfig.eslint.json */
 {
   "compilerOptions": {
     "baseUrl": ".",
@@ -229,13 +229,13 @@ fly-helper
 ### 配置 .babelrc
 
 ```json
-# .babelrc
+/* .babelrc */
 {
   "presets": [
     [
       "@babel/preset-env",
       {
-        # Babel 会在 Rollup 有机会做处理之前，将我们的模块转成 CommonJS，导致 Rollup 的一些处理失败
+        /* Babel 会在 Rollup 有机会做处理之前，将我们的模块转成 CommonJS，导致 Rollup 的一些处理失败 */
         "modules": false
       }
     ]
@@ -485,7 +485,7 @@ yarn add -D @microsoft/api-extractor
 ### 配置 api-extractor.json
 
 ```json
-# api-extractor.json
+/* api-extractor.json */
 {
   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
   "mainEntryPointFilePath": "./lib/index.d.ts",
@@ -570,7 +570,7 @@ yarn add -D gulp @types/gulp fs-extra @types/fs-extra @types/node ts-node chalk
   "typings": "lib/index.d.js",
 
   "scripts": {
-      # ...
+      /* ... */
       "build": "gulp build",
   }
 ```
@@ -801,17 +801,17 @@ yarn add -D husky lint-staged
 ### package.json
 
 ```json
-# pushlish 的文件
+/* pushlish 的文件 */
 "files": [
     "lib",
     "LICENSE",
     "CHANGELOG.md",
     "README.md"
 ],
-# 使得支持 tree shaking
+/* 使得支持 tree shaking */
 "sideEffects": "false",
 "script": {
-    # ...
+    /* ... */
     "changelog": "gulp changelog",
     "prepublishOnly": "yarn lint & yarn test & yarn changelog & yarn build"
 }
