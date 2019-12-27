@@ -8,7 +8,7 @@
 
 公司内总是有许多通用的工具方法、业务功能，我们可以搭建一个工具库来给各个项目使用。
 
-要实现的需求：
+要实现的需求：🤔
 
 - 支持编辑器的快速补全和提示
 - 自动化构建
@@ -193,7 +193,7 @@ module.exports = eslintrc
 
 ## 配置 rollup
 
-vue、react 等许多流行库都在使用 Rollup.js ，就不多介绍，直接看 [官网](https://www.rollupjs.com/) 吧
+vue、react 等许多流行库都在使用 Rollup.js ，就不多介绍，直接看 [官网](https://www.rollupjs.com/) 吧🤯
 
 
 
@@ -456,7 +456,7 @@ const eslintrc = {
 yarn test
 ```
 
-是不是成功了呢
+是不是成功了呢😌
 
 ![](http://file.wangsijie.top/blog/20191226154137.png)
 
@@ -689,7 +689,7 @@ export const build = series(clearLibFile, buildByRollup, apiExtractorGenerate, c
 yarn build
 ```
 
-溜去 lib 文件下瞅瞅🧐，美滋滋。🥳
+溜去 lib 文件下瞅瞅🧐，美滋滋。
 
 
 
@@ -755,10 +755,10 @@ declare module 'conventional-changelog'
 
 ### Ps
 
-使用该工具需要注意一下
+使用 conventional-changelog 需要注意一下
 
 - 非常注意 commit 格式，格式采用 [angular commit 规范](https://github.com/angular/angular/blob/master/CONTRIBUTING.md)，会识别 feat 和 fix 开头的 commit ，然后自动生成
-- 每次更改需要先升级 version 再去生成。。后面会有例子
+- 每次更改需要先升级 version 再去生成。后面会有例子
 
 
 
@@ -792,7 +792,7 @@ yarn add -D husky lint-staged
 
 
 
-之后提交代码都会先 lint 验证，再 jest 测试通过，才可以提交。避免误操作。
+之后提交代码都会先 lint 验证，再 jest 测试通过，才可以提交。规范团队协作的代码规范
 
 
 
@@ -801,6 +801,7 @@ yarn add -D husky lint-staged
 ### package.json
 
 ```json
+# pushlish 的文件
 "files": [
     "lib",
     "LICENSE",
@@ -816,9 +817,9 @@ yarn add -D husky lint-staged
 }
 ```
 
-prepublishOnly 可以在 publish 的时候，先 lint 验证， 再 jest 测试 ， 再 生成 changlog ，最后 打包，最后 发布。
+prepublishOnly 可以在 publish 的时候，先 lint 验证， 再 jest 测试 ， 再生成 changlog ，最后打包，最后发布。
 
-至此，我们已经实现了全部需求。
+至此，我们已经实现了全部需求。🥳
 
 
 
@@ -830,7 +831,7 @@ prepublishOnly 可以在 publish 的时候，先 lint 验证， 再 jest 测试 
 
 - 我们假装现在开始写第一个方法。我删除了上面的例子，增加了一个 calculate.ts
 
-    请看 commit
+    请看[仓库地址 release/1.0.0 分支](https://github.com/simonwong/fly-helper/tree/release/1.0.0)
 
 - 然后我们提交这次更改，commit 内容为 `feat: 新增 calculateOneAddOne 计算 1 + 1 方法`
 
@@ -840,11 +841,15 @@ prepublishOnly 可以在 publish 的时候，先 lint 验证， 再 jest 测试 
 
     版本规范参考 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)
 
-- `yarn changelog` 看看你的 changelog.md 就自动生成了
+- `yarn changelog` 看看你的 changelog.md 就自动生成了🥳
+
+![](http://file.wangsijie.top/blog/20191227100915.png)
 
 
 
-完整内容 [fly-helper/release/1.0.0](https://github.com/simonwong/fly-helper/tree/release/1.0.0)
+### 仓库地址
+
+[fly-helper/release/1.0.0](https://github.com/simonwong/fly-helper/tree/release/1.0.0)
 
 
 
@@ -859,6 +864,8 @@ prepublishOnly 可以在 publish 的时候，先 lint 验证， 再 jest 测试 
 [Rollup.js 中文网](https://www.rollupjs.com/)
 
 [rollup - pkg.module](https://github.com/rollup/rollup/wiki/pkg.module)
+
+> If you're writing a package, strongly consider using `pkg.module`
 
 [jest 中文文档](https://jestjs.io/docs/zh-Hans/getting-started)
 
