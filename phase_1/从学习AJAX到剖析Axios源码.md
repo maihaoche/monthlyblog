@@ -1,5 +1,8 @@
+> 文章讲述了 AJAX 的学习，顺便附属了 Axios 源码分析
+## AJAX 学习
 AJAX 可以说是一个非常熟悉非常基础的词，如果有人问你懂不懂 AJAX，相信你必定胸有成竹。
 
+### AJAX 介绍
 行吧，希望你能多骄傲一会，咱先简单介绍一下 AJAX。
 
 AJAX 的全称是 Asynchronous JavaScript and XML，概括的说就是用 JavaScript 执行异步网络请求。
@@ -12,6 +15,7 @@ AJAX 的全称是 Asynchronous JavaScript and XML，概括的说就是用 JavaSc
 
 其实 AJAX 就是用 JavaScript 去发送这个请求，接收到数据后再用 JavaScript 去更新页面，所以AJAX 能够做到 HTTP 请求还停留在当前页面。
 
+### AJAX 实现
 简单介绍完 AJAX 我们用 JavaScript 实现一下 ，但需要注意 AJAX 请求是异步执行的。
 ```javascript
   function success(text) {
@@ -44,6 +48,8 @@ AJAX 的全称是 Asynchronous JavaScript and XML，概括的说就是用 JavaSc
   request.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
   request.send('name=jinguo&age=18');
 ```
+
+### AJAX 小问题
 简单了解完 AJAX，也简单实现了以后，你是否还一如既往的胸有成竹。
 
 如果是的，别急，请你告诉我 GET 请求和 POST 请求的区别是什么？
@@ -78,6 +84,7 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
     <img src="http://img.janggwa.cn/zaixiapeifu.jpg" />
 </div>
 
+## Axios 源码剖析
 ---
 好了，简单学习了 AJAX 后，我们正经剖析一下项目中经常用到的 Axios 源码。
 
@@ -85,6 +92,7 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
     <img src="http://img.janggwa.cn/zhengjing.gif" />
 </div>
 
+### Axios 源码目录
 先看一下 Axios 源码目录结构
 ```
   lib
@@ -107,6 +115,7 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
   ├── defaults.js // axios默认配置
   └── utils // 一些工具方法
 ```
+### axios.js
 我们直接干到 Axios 项目的入口文件 ，先省略一些 axios 的其它方法
 ```javascript
   // lib/axios.js
@@ -138,6 +147,8 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
 可以看到这个文件非常简单，只是去创建了 Axios 实例，然后进行导出。
 
 创建 Axios 实例的时候多次出现了 Axios.prototype,这里面究竟干了啥，咱去 core 文件夹下的 Axios.js 看看。
+
+### Axios.js
 ```javascript
   // lib/core/Axios.js
   function Axios(instanceConfig) {
@@ -182,6 +193,8 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
   module.exports = Axios;
 ```
 这边了解完 Axios.prototype 上有哪些方法后，可以发现核心是调用到了 Axios.prototype.request 方法。
+
+### Axios.prototype.request
 ```javascript
   // lib/core/Axios.js
   Axios.prototype.request = function request(config) {
@@ -233,6 +246,8 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
   };
 ```
 我们发现 Axios.prototype.request 很巧妙的用到了请求拦截器和响应拦截器，我们去看看拦截器类干了什么
+
+### InterceptorManager.js
 ```javascript
   // lib/core/InterceptorManager.js
   function InterceptorManager() {
@@ -267,6 +282,8 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
   module.exports = InterceptorManager;
 ```
 拦截器类就是在其原型上添加了一些方法去处理拦截器，那如果我们没有设置拦截器的话，可以看到执行的直接就是 dispatchRequest，这里也就是实际调用请求的地方。
+
+### dispatchRequest.js
 ```javascript
   // lib/core/dispatchRequest.js
   module.exports = function dispatchRequest(config) {
@@ -310,6 +327,8 @@ GET 请求产生一个 TCP 数据包，而 POST 请求会产生两个TCP数据�
   };
 ```
 dispatchRequest 文件中可以看到最后调用了 adapter 方法，这边的 adapter 我们就看浏览器端的 xhr 适配器
+
+### xhr.js
 ```javascript
   // lib/adapters/xhr.js
   module.exports = function xhrAdapter(config) {
@@ -472,8 +491,11 @@ dispatchRequest 文件中可以看到最后调用了 adapter 方法，这边的 
   };
 ```
 看完适配器后，整个 axios 发起请求的流程，相信你心中应该已经有了整体了解。最后，我们再看看取消发起请求
+### CacncelToken.js
 ```javascript
   // lib/cancel/CancelToken.js
+  // axios.get(url, { cancelToken: new axios.CancelToken(cancel=> cancel('取消'))})
+  // 依照上面的使用，我们可以发现 executor 就是 cancel => cancel('取消')
   function CancelToken(executor) {
     if (typeof executor !== 'function') {
       throw new TypeError('executor must be a function.');
@@ -486,6 +508,7 @@ dispatchRequest 文件中可以看到最后调用了 adapter 方法，这边的 
     });
   
     var token = this;
+    // 执行传入方法，根据外部条件控制何时执行 cancel 方法
     executor(function cancel(message) {
       if (token.reason) {
         return;
@@ -504,6 +527,7 @@ dispatchRequest 文件中可以看到最后调用了 adapter 方法，这边的 
     }
   };
   
+  // 创建 source 对象，返回 token 和 cancel 方法
   CancelToken.source = function source() {
     var cancel;
     var token = new CancelToken(function executor(c) {
@@ -517,8 +541,9 @@ dispatchRequest 文件中可以看到最后调用了 adapter 方法，这边的 
   
   module.exports = CancelToken;
 ```
-当然这个取消发起请求需要配合上 adapter 的 request.abort 方法
+取消发送请求的核心就是通过 executor 参数拿到 cancel 方法的控制权，当执行 cancel 方式时就可以去调用适配器的 request.abort 方法去取消请求
 
+## 总结
 到了这里，我们已经把 Axios 源码整体剖析了一遍，再简单梳理一下，当使用 axios 发起一个请求，我们其实调用了Axios.prototype.request 方法，这个方法的核心是调用了 dispatchRequest，而 dispatchRequest 的核心是调用了 adapter，浏览器端默认是 xhrAdapter，node端默认是 httpAdapter，执行完后会返回一个 Promise。
 
 从 AJAX 学习到探索 Axios 源码的过程还是有非常多的乐趣和成长的，希望你们也有所收获，感谢阅读我的文章！
