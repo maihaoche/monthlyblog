@@ -5,6 +5,11 @@
 ## canvas 基础篇
 ### 1、canvas 样式设置
 canvas 基于像素，默认设置的宽高是 300px/150px，和 img 标签表现很类似，用 CSS 设置宽高相当于改变这张图片的宽高缩放比；而用 JS 改变宽高，实际是设置 canvas 上的像素。如果 CSS 设置的宽高比和 JS 设置的宽高比不同，canvas 的图像就会变形。
+```html
+<body>
+  <canvas id="canvasId"></canvas>
+</body>
+```
 ```js
 const cvs = document.getElementById("canvasId");
 const ctx = cvs.getContext("2d");
@@ -17,7 +22,7 @@ cvs.style.height = '300px'; // 在页面中实际显示的宽高只有 300x300
 ```
 
 ### 2、canvas 绘制
-canvas 绘制的坐标原点（0, 0）在左上角，所有绘制的图形都依据这个坐标原点定位。  
+canvas 绘制的坐标原点 (0, 0) 在左上角，所有绘制的图形都依据这个坐标原点定位。  
 
 #### canvas 基础绘制方式
 canvas 绘制主要有两种方式，stroke（笔画）和 fill（填充），类似于 PS 上的“笔”和“油漆桶”。  
