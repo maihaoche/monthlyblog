@@ -52,7 +52,7 @@ use 数据库名;
 ##### 1. 一对一关系
 > 一对一关系是最好理解的一种关系，在数据库建表的时候可以将人表的主键放置与身份证表里面，也可以将身份证表的主键放置于人表里面
 
-![image](https://img.maihaoche.com/mhc-ui/1576215251893_157621525100048590.png)
+![image](https://img.maihaoche.com/mhc-ui/rc-upload-1577754987679-2_WechatIMG856.png)
 ##### 2. 一对多关系
 > 班级是1端，学生是多端，结合面向对象的思想，1端是父亲，多端是儿子，所以多端具有1端的属性，也就是说多端里面应该放置1端的主键，那么学生表里面应该放置班级表里面的主键
 ![image](https://img.maihaoche.com/mhc-ui/1576215405089_157621540500046644.png)
@@ -132,7 +132,7 @@ alter table 表名 modify 字段名 新的字段类型 [新的字段选项];
 ```
 #数据操作
 /*关键字:insert 插入数据(增)*/
-insert into 表名(字段列表) values(值列表);
+insert into 表名(字段列表) values (值列表);
 例如: create table user(
   id int(10) unsigned not null auto_increment comment 'id',
   name char(10) not null default '' comment '名字',
@@ -232,22 +232,22 @@ select * from 表 where name like 'ale_'  - ale开头的所有（一个字符）
 　　3.不允许出现嵌套 比如sum(max(xx))<br>
 　　
 　　
-###### 1.聚合函数 count（），求数据表的行数
+###### 1.聚合函数 count ()，求数据表的行数
 
 ```
 select count(*/字段名) from 数据表）——不建议conunt（*），建议用count（0）
 ```
-###### 2.聚合函数 max（），求某列的最大数值
+###### 2.聚合函数 max()，求某列的最大数值
 
 ```
 select max(字段名）from 数据表
 ```
-###### 3.聚合函数min（）,求某列的最小值
+###### 3.聚合函数min(),求某列的最小值
 
 ```
 select min(字段名） from 数据表
 ```
-###### 4.聚合函数sum（）,对数据表的某列进行求和操作
+###### 4.聚合函数sum(),对数据表的某列进行求和操作
 
 ```
 select sum(字段名) from 数据表
@@ -260,10 +260,10 @@ select avg(字段名） from 数据表
 ###### 6.聚合函数和分组一起使用
 
 ```
-select count(*),group_concat(age) from students group by age;
+select count(*), group_concat(age) from students group by age;
 
 1、功能：将group by产生的同一个分组中的值连接起来，返回一个字符串结果。
-2、语法：group_concat( [distinct] 要连接的字段 [order by 排序字段 asc/desc ] [separator '分隔符'] )
+2、语法：group_concat([distinct] 要连接的字段 [order by 排序字段 asc/desc ] [separator '分隔符'])
 ```
 ###### 7.数学函数
 
@@ -402,7 +402,7 @@ b、组合
 
  - |关系型数据库 | 非关系型数据库（NoSql--->not only sql）
 ---|---|---
-应用 | mariaDB, MySQL, Oracle, SQL Server 等 | mongoDB(文档型数据库), redis(键值型数据库), 列存储数据库  (HBase), Neo4j 等 |11
+应用 | mariaDB, MySQL, Oracle, SQL Server 等 | mongoDB (文档型数据库), redis (键值型数据库), 列存储数据库  (HBase), Neo4j 等 |11
 优点 | 1.易于维护：都是使用表结构，格式一致<br> 2.使用方便：SQL语言通用，可用于复杂查询；<br>3.复杂操作：支持SQL，可用于一个表以及多个表之间非常复杂的查询。 |1.格式灵活：存储数据的格式可以是key,value形式、文档形式、图片形式等等，文档形式、图片形式等等，使用灵活，应用场景广泛，而关系型数据库则只支持基础类型。<br>2.速度快：nosql可以使用硬盘或者随机存储器作为载体，而关系型数据库只能使用硬盘；<br>3.高扩展性 <br>4.成本低：nosql数据库部署简单，基本都是开源软件。。<br>5.支持分布式集群，负载均衡，性能高 |
 缺点 | 1.每次操作都要进行sql语句的解析,消耗较大<br>2.读写性能比较差，尤其是海量数据的高效率读写；<br>3.固定的表结构，灵活度稍欠；(一致性)<br>4.高并发读写需求，传统关系型数据库来说，硬盘I/O是一个很大的瓶颈| 1.技术起步晚，维护工具以及技术资料有限<br>2.不支持 sql 工业标准<br>3.没有join等复杂的连接操作<br> 4.事务处理能力弱<br>5.没有完整性约束，对于复杂业务场景支持较差|
 应用场景 || 1.为有数据更新的表做索引或表结构变更<br>2.字段不固定时的应用<br> 3.对简单查询需要快速返回结果的处理 |
