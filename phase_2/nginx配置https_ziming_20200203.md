@@ -230,7 +230,7 @@ server {
 
 ### 加密套件
 
-https 默认采用 SHA-1 算法，非常脆弱。我们可以使用 [迪菲-赫尔曼密钥交换]([https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E5%AF%86%E9%91%B0%E4%BA%A4%E6%8F%9B](https://zh.wikipedia.org/wiki/迪菲-赫爾曼密鑰交換))。
+https 默认采用 SHA-1 算法，非常脆弱。我们可以使用 [迪菲-赫尔曼密钥交换](https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E5%AF%86%E9%91%B0%E4%BA%A4%E6%8F%9B)。
 
 我们在 `/conf/ssl` 目录下生成 `dhparam.pem` 文件
 
