@@ -55,12 +55,12 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
   ```
 ### application.js
   ```javascript
-    // 继承了events，这样就会赋予事件监听和事件触发的能力
+    // 继承了 events，这样就会赋予事件监听和事件触发的能力
     module.exports = class Application extends Emitter {
       constructor(options) {
         super();
-        this.middleware = []; // 该数组存放所有通过use函数的引入的中间件函数
-        // 创建对应的context、request、response。
+        this.middleware = []; // 该数组存放所有通过 use 函数的引入的中间件函数
+        // 创建对应的 context、request、response。
         this.context = Object.create(context);
         this.request = Object.create(request);
         this.response = Object.create(response);
@@ -69,7 +69,7 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
       // 对 http.createServer 进行了一个封装
       listen(...args) {
         debug('listen');
-        // 重点是这个函数中传入的 callback，包含了中间件的合并，上下文的处理，对res的特殊处理。
+        // 重点是这个函数中传入的 callback，包含了中间件的合并，上下文的处理，对 res 的特殊处理。
         const server = http.createServer(this.callback());
         return server.listen(...args);
       }
@@ -98,7 +98,7 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
     
       // 封装出强大的 ctx
       createContext(req, res) {
-        // 创建了3个简单的对象，并且将他们的原型指定为我们 app 中对应的对象。然后将原生的req 和 res 赋值给相应的属性
+        // 创建了3个简单的对象，并且将他们的原型指定为我们 app 中对应的对象。然后将原生的 req 和 res 赋值给相应的属性
         const context = Object.create(this.context);
         const request = context.request = Object.create(this.request);
         const response = context.response = Object.create(this.response);
