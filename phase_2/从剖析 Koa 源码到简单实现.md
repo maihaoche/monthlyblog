@@ -57,38 +57,38 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
   ```javascript
     // 继承了events，这样就会赋予事件监听和事件触发的能力
     module.exports = class Application extends Emitter {
-    	constructor(options) {
+      constructor(options) {
         super();
         this.middleware = []; // 该数组存放所有通过use函数的引入的中间件函数
-    		// 创建对应的context、request、response。
+        // 创建对应的context、request、response。
         this.context = Object.create(context);
         this.request = Object.create(request);
         this.response = Object.create(response);
       }
     
-    	// 对 http.createServer 进行了一个封装
-    	listen(...args) {
+      // 对 http.createServer 进行了一个封装
+      listen(...args) {
         debug('listen');
-    		// 重点是这个函数中传入的 callback，包含了中间件的合并，上下文的处理，对res的特殊处理。
+        // 重点是这个函数中传入的 callback，包含了中间件的合并，上下文的处理，对res的特殊处理。
         const server = http.createServer(this.callback());
         return server.listen(...args);
       }
     
-    	// use 是注册中间件，将多个中间件放入一个缓存队列中
-    	use(fn) {
+      // use 是注册中间件，将多个中间件放入一个缓存队列中
+      use(fn) {
         this.middleware.push(fn);
         return this;
       }
     	
-    	// 返回一个类似 (req, res) => {} 的函数
-    	callback() {
-    		// 将所有传入 use 的中间件函数通过 koa-compose 组合一下,compose 在下文自己实现 koa 时会有讲解
+      // 返回一个类似 (req, res) => {} 的函数
+      callback() {
+        // 将所有传入 use 的中间件函数通过 koa-compose 组合一下,compose 在下文自己实现 koa 时会有讲解
         const fn = compose(this.middleware);
     
         if (!this.listenerCount('error')) this.on('error', this.onerror);
-    
+
         const handleRequest = (req, res) => {
-    			// 根据 req 和 res 封装中间件所需要的 ctx。
+          // 根据 req 和 res 封装中间件所需要的 ctx。
           const ctx = this.createContext(req, res);
           return this.handleRequest(ctx, fn);
         };
@@ -96,9 +96,9 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
         return handleRequest;
       }
     
-    	// 封装出强大的 ctx
-    	createContext(req, res) {
-    		// 创建了3个简单的对象，并且将他们的原型指定为我们 app 中对应的对象。然后将原生的 req 和 res 赋值给相应的属性
+      // 封装出强大的 ctx
+      createContext(req, res) {
+        // 创建了3个简单的对象，并且将他们的原型指定为我们 app 中对应的对象。然后将原生的req 和 res 赋值给相应的属性
         const context = Object.create(this.context);
         const request = context.request = Object.create(this.request);
         const response = context.response = Object.create(this.response);
@@ -111,7 +111,7 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
         return context;
       }
     
-    	handleRequest(ctx, fnMiddleware) {
+      handleRequest(ctx, fnMiddleware) {
         const res = ctx.res;
         res.statusCode = 404;
     
@@ -139,10 +139,10 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
 ## context.js
   ```javascript
     const proto = module.exports = {
-    	onerror(err) {
-    		// 触发 application 实例的 error 事件
-    		this.app.emit('error', err, this);
-    	}
+      onerror(err) {
+        // 触发 application 实例的 error 事件
+        this.app.emit('error', err, this);
+      }
     }
     
     // 下面 2 个 delegate 的作用是让 context 对象代理 request 和 response 的部分属性和方法
@@ -175,15 +175,15 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
         this.req.headers = val;
       },
     
-    	get url() {
+      get url() {
         return this.req.url;
       },
     
-    	set url(val) {
+      set url(val) {
         this.req.url = val;
       },
-    	// 省略了大量类似的工具属性和方法
-    	...
+      // 省略了大量类似的工具属性和方法
+      ...
     };
   ```
 > 访问 ctx.request.xxx 时，实际是在访问 request 对象上的 setter 和 getter
@@ -191,21 +191,21 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
 ## response.js
   ```javascript
     module.exports = {
-    	get header() {
+      get header() {
         const { res } = this;
         return typeof res.getHeaders === 'function'
           ? res.getHeaders()
           : res._headers || {}; // Node < 7.7
       },
-    	get body() {
+      get body() {
         return this._body;
       },
     
       set body(val) {
         this._body = val;
       },
-    	// 省略了大量类似的工具属性和方法
-    	...
+      // 省略了大量类似的工具属性和方法
+      ...
     }
   ```
 > response 对象与 request 对象类似
@@ -218,34 +218,34 @@ Koa 是一个基于 node 实现的 http 中间件框架，它是由 express 框�
     const response = require("./response");
     
     class JKoa {
-    	constructor() {
-    		this.middlewares = [];
-    	}
+      constructor() {
+        this.middlewares = [];
+      }
     	
-    	listen(...args) {
-    		const server = http.createServer(async (req, res) => {
-    			// 创建上下文对象
-    			const ctx = this.createContext(req, res);
-    			// 将 middlewares 组合,compose 函数在下面实现
-    			const fn = this.compose(this.middlewares);
-    			await fn(ctx)
-    			// 给用户返回数据
-    			res.end(ctx.body);
-    		});
-    		server.listen(...args);
-    	}
-    	
-    	use(middlewares) {
-    		this.middlewares.push(middlewares);
-    	}
+      listen(...args) {
+        const server = http.createServer(async (req, res) => {
+          // 创建上下文对象
+          const ctx = this.createContext(req, res);
+          // 将 middlewares 组合,compose 函数在下面实现
+          const fn = this.compose(this.middlewares);
+          await fn(ctx)
+          // 给用户返回数据
+          res.end(ctx.body);
+        });
+        server.listen(...args);
+      }
+      
+      use(middlewares) {
+        this.middlewares.push(middlewares);
+      }
     
-    	createContext(req, res) {
-    		const ctx = Object.create(context);
-    		ctx.request = Object.create(request);
-    		ctx.response = Object.create(response);
-    		ctx.req = ctx.request.req = req;
-    		ctx.res = ctx.response.res = res;
-    	}
+      createContext(req, res) {
+        const ctx = Object.create(context);
+        ctx.request = Object.create(request);
+        ctx.response = Object.create(response);
+        ctx.req = ctx.request.req = req;
+        ctx.res = ctx.response.res = res;
+      }
     }
     
     module.exports = JKoa;
@@ -256,32 +256,32 @@ koa 为了能够简化 API， 引入上下文 context 概念，将原始请求�
   ```javascript
     // context.js
     module.exports = {
-    	get url() {
-    		retrun this.request.url;
-    	},
-    	get body() {
-    		return this.response.body;
-    	},
-    	set body(val) {
-    		this.response.body = val;
-    	}
+      get url() {
+        retrun this.request.url;
+      },
+      get body() {
+        return this.response.body;
+      },
+      set body(val) {
+        this.response.body = val;
+      }
     }
     
     // request.js
     module.exports = {
-    	get url() {
-    		return this.req.url;
-    	}
+      get url() {
+        return this.req.url;
+      }
     }
     
     // response.js
     module.exports = {
-    	get body() {
-    		return this._body;
-    	},
-    	set body(val) {
-    		this._body = val;
-    	}
+      get body() {
+        return this._body;
+      },
+      set body(val) {
+        this._body = val;
+      }
     }
   ```
 ## 中间件
@@ -289,11 +289,11 @@ koa 为了能够简化 API， 引入上下文 context 概念，将原始请求�
 > 我们先通过下面的例子了解一下函数组合的概念
   ```javascript
     function add(x, y) {
-    	return x + y;
+      return x + y;
     }
     
     function square(z) {
-    	return z * z
+      return z * z
     }
     
     // 普通方式
@@ -301,7 +301,7 @@ koa 为了能够简化 API， 引入上下文 context 概念，将原始请求�
     
     // 函数组合方式
     function compose(middlewares) {
-    	return middlewares.reduce((prev, next) => (...args) => next(prev(...args)));
+      return middlewares.reduce((prev, next) => (...args) => next(prev(...args)));
     }
     
     const middlewares = [add, square];
@@ -311,22 +311,22 @@ koa 为了能够简化 API， 引入上下文 context 概念，将原始请求�
 > 上面的例子组合函数是同步的，挨个遍历执行就可以，如果是异步的函数，我们要支持 async + await 的中间件
   ```javascript
     function compose(middlewares) {
-    	return function(ctx) {
-    		// 执行第 0 个
-    		return dispatch(0);
-    		function dispatch(i) {
-    			let fn = middlewares[i];
-    			if (!fn) {
-    				return Promise.resolve();
-    			}
-    			return Promise.resolve(
-    				fn(ctx, function next() {
-    					// promise 完成后再执行下一个
-    					return dispatch(i + 1);
-    				})
-    			);
-    		}
-    	}
+      return function(ctx) {
+        // 执行第 0 个
+        return dispatch(0);
+        function dispatch(i) {
+          let fn = middlewares[i];
+          if (!fn) {
+            return Promise.resolve();
+          }
+          return Promise.resolve(
+            fn(ctx, function next() {
+              // promise 完成后再执行下一个
+              return dispatch(i + 1);
+            })
+          );
+        }
+      }
     }
   ```
 > Koa 中间件机制就是函数组合的概念，将一组需要顺序执行的函数复合为一个函数，外层函数的参数实际是内层函数的返回值。洋葱圈模型可以形象表示这种机制，是 Koa 源码中的精髓和难点。
