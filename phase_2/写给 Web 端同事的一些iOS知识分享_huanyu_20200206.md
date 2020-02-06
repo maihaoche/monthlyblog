@@ -41,19 +41,25 @@
 - ***.h**： 头文件，声明类、方法以及属性，相当于对外暴露可访问接口。
 - ***.m**： 实现 `.h` 中声明的方法，添加私有方法、属性。
 - ***.pch**： 预编译头文件，通常用于放置 `宏定义` 和 `公共头文件`
+
 <br/>
 <br/>
+
 - ***.xib**： 可视化View布局文件，本质是使用`XML`描述的View布局文件
 - ***.storyboard**： 故事板，`xib`的强化版，同样是使用`XML`描述的布局文件，但可放置、连接控制多个页面跳转逻辑
 - ***.plist**： 全称`Property List`(属性列表)，可用于存储序`列化后`的对象，常用用于存储`用户配置`，轻量级的持久化方案
 - ***.lproj**： 国际化包，可包含`文本`、`图片`、`xib`、`storyboard`
 - ***.xcassets**： (图片)资源文件包，通常用于放置`图片资源`，后续增加了`颜色`等
+
 <br/>
 <br/>
+
 - **Podfile**： 广泛使用的包依赖管理(`Cocoapods`)的配置文件，可类比成web项目的`package.json`
 - ***Podfile.lock**： 依赖管理工具安装依赖的锁定版本，可类比成web项目的`package-lock.json`
+
 <br/>
 <br/>
+
 - ***.xcodeproj**： Xcode 工程文件，存储工程的各种配置
 - ***.xcworkspace**： Xcode 工程文件，通常是使用依赖管理工具 `Cocoapods` 执行 `pod install` 安装了依赖之后生成的（也可自己搞，是多个 `xcodeproj` 的合集）。
 
@@ -83,11 +89,13 @@
 在App进程中跑，加载页面的内存是算在App占用内存中的，当app内存超过限制时，会通知app处理，若未处理整个app会被kill。
 已成历史，2020年4月开始禁止新的App使用，年底禁止所有含有的App更新。
 <br>
+
 - WKWebView *(iOS 8.0 ~ )*
 独立进程，当其内存占用超过系统分配给WKWebView的内存时，WKWebView会崩溃白屏并通知app进行处理，未处理app不会被kill。内存是 UIWebView 的1/3 - 1/4，启动更快。异步处理与native桥接通信的js。
 
 <br>
 当然 WKWebView 也是有很多坑点的：
+
 - 虽然从iOS 8.0开始支持，但是有很多问题，所以一般会从9.0才开始使用。不过鉴于iOS用户更新率非常高（从目前[官方数据](https://developer.apple.com/support/app-store/)来看 50%的iPhone已经是iOS 13了， 41%的iOS12），这个基本可以忽略了。
 - Cookie会出现携带不上的问题。
 - 通过loadRequest发起post请求的body会被丢掉。
@@ -263,16 +271,19 @@ web开发者也可以直接在web项目中内嵌一个开发工具，比如：
 
 ![](https://github.com/liriliri/eruda/raw/master/doc/screenshot.jpg)
 
+
 > 一些资料
 
 [human-interface-guidelines](https://developer.apple.com/design/human-interface-guidelines/)
+
 [WWDC-Videos](https://developer.apple.com/videos/)
 
 [iOS Programming Tricks](https://codeingwithios.blogspot.com/2017/09/ios-layered-architecture.html)
+
 [一份走心的JS-Native交互电子书.pdf](https://github.com/awesome-tips/iOS-Tips/blob/master/resources/%E4%B8%80%E4%BB%BD%E8%B5%B0%E5%BF%83%E7%9A%84JS-Native%E4%BA%A4%E4%BA%92%E7%94%B5%E5%AD%90%E4%B9%A6.pdf)
 
 [Websites for iPhoneX](https://webkit.org/blog/7929/designing-websites-for-iphone-x/)
-[DarkMode in Webkit](https://webkit.org/blog/8840/dark-mode-support-in-webkit/)
 
+[DarkMode in Webkit](https://webkit.org/blog/8840/dark-mode-support-in-webkit/)
 
 
