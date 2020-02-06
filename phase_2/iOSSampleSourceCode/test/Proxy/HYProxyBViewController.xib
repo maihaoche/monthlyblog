@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HYProxyBViewController">
+            <connections>
+                <outlet property="refreshBtn" destination="0ex-LK-W9y" id="SI2-Pq-3T4"/>
+                <outlet property="sendBtn" destination="sa8-WV-7Rb" id="n6S-JD-weY"/>
+                <outlet property="textfield" destination="bsP-jJ-sOG" id="wbV-W6-aYs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sa8-WV-7Rb">
+                    <rect key="frame" x="339" y="94" width="60" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Hgn-JY-CI7"/>
+                        <constraint firstAttribute="width" constant="60" id="f9e-kv-LAP"/>
+                    </constraints>
+                    <state key="normal" title="发给A"/>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="发给A什么东西" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-jJ-sOG">
+                    <rect key="frame" x="15" y="94" width="309" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="F8o-VX-jGx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ex-LK-W9y">
+                    <rect key="frame" x="157" y="178" width="100" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="0iL-ar-Llq"/>
+                        <constraint firstAttribute="height" constant="40" id="gWj-5v-vJh"/>
+                    </constraints>
+                    <state key="normal" title="让A刷新一下"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="bsP-jJ-sOG" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="3XV-lg-FdK"/>
+                <constraint firstItem="0ex-LK-W9y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Bdf-oB-SBX"/>
+                <constraint firstItem="sa8-WV-7Rb" firstAttribute="centerY" secondItem="bsP-jJ-sOG" secondAttribute="centerY" id="HGM-qp-6Y6"/>
+                <constraint firstItem="sa8-WV-7Rb" firstAttribute="leading" secondItem="bsP-jJ-sOG" secondAttribute="trailing" constant="15" id="MFh-6E-oxa"/>
+                <constraint firstItem="bsP-jJ-sOG" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="50" id="ahk-PC-Mn4"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="sa8-WV-7Rb" secondAttribute="trailing" constant="15" id="bVt-cB-dcR"/>
+                <constraint firstItem="0ex-LK-W9y" firstAttribute="top" secondItem="bsP-jJ-sOG" secondAttribute="bottom" constant="44" id="fLn-6c-23D"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
+        </view>
+    </objects>
+</document>
