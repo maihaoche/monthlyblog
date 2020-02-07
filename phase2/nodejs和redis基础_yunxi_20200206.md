@@ -176,7 +176,7 @@ client.spop('class',function (err,data) {
 client.sdiff('class','name',function (err,data) {
     console.log(data)
 })
-// 返回那些同事存在于所有集合中的元素(交集) sinter('key1', 'key2'[, 'key3', ...])
+// 返回那同时存在于所有集合中的元素(交集) sinter('key1', 'key2'[, 'key3', ...])
 client.sinter('class','name',function (err,data) {
     console.log(data)
 })
