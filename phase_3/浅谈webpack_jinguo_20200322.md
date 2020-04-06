@@ -18,9 +18,9 @@ Entry 用来指定 webpack 的打包入口，根据入口文件的依赖形成�
 
 Entry 用法一般有两种形式，单入口形式和多入口形式。
 
-单入口形式 entry 是一个字符串，entry:  './index.js'。
+单入口形式 entry 是一个字符串，`entry:  './index.js'`。
 
-多入口形式 entry 是一个对象，entry: { app: './src/app.js', index: './src/index.js' }。
+多入口形式 entry 是一个对象，`entry: { app: './src/app.js', index: './src/index.js' }`。
 
 ### Output
 
@@ -28,9 +28,9 @@ Output 用来告诉 webpack 如何将编译后的文件输出到磁盘。
 
 Output 用法可以根据 Entry 单入口形式和多入口形式进行不同配置。
 
-单入口形式可以将 output 配置成写死的 filename，output: { filename: 'boundle.js', path: __dirname + '/dist'}。
+单入口形式可以将 output 配置成写死的 filename，`output: { filename: 'boundle.js', path: __dirname + '/dist'}`。
 
-多入口形式可以将 output 配置通过占位符确保文件名称唯一，output: { filename: '[name].js', path: __dirname + '/dist'}。
+多入口形式可以将 output 配置通过占位符确保文件名称唯一，`output: { filename: '[name].js', path: __dirname + '/dist'}`。
 
 ### Loaders
 
@@ -47,9 +47,9 @@ webpack 原生只支持 JS 和 JSON 两种文件类型，通过 Loaders 去支�
 | file-loader | 进行图片、字体等的打包 |
 | thread-loader | 多进程打包 JS 和 CSS |
 
-Loaders 的用法，module: { rules: [{test: /\.js$/, use: 'babel-loader'}]}，test 指定匹配规则，use指定 loader 使用的名称
+Loaders 的用法，`module: { rules: [{test: /\.js$/, use: 'babel-loader'}]}`，test 指定匹配规则，use指定 loader 使用的名称
 
-如果配置多个 loader 时，module: { rules: [{test: /\.less/, use: ['style-loader', 'css-loader', 'less-loader']}]}，loader 的执行顺序时从右往左，右边的执行结果作为参数传到左边。less-loader 把 less 转化成 css，传给 css-loader，css-loader 将 css 文件转换成 commonjs 对象传给 style-loader，style-loader 将样式通过<style>标签插入到 head 中。
+如果配置多个 loader 时，`module: { rules: [{test: /\.less/, use: ['style-loader', 'css-loader', 'less-loader']}]}`，loader 的执行顺序时从右往左，右边的执行结果作为参数传到左边。less-loader 把 less 转化成 css，传给 css-loader，css-loader 将 css 文件转换成 commonjs 对象传给 style-loader，style-loader 将样式通过<style>标签插入到 head 中。
 
 ### Plugins
 
@@ -65,7 +65,7 @@ Loaders 的用法，module: { rules: [{test: /\.js$/, use: 'babel-loader'}]}，t
 | HtmlWebpackPlugin | 创建 html 文件去承载输出的 bundle |
 | UglifyjsWebpackPlugin | 压缩 JS |
 
-Plugins 的用法，plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })]。
+Plugins 的用法，`plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })]`。
 
 ### Mode
 
@@ -88,7 +88,7 @@ NoEmitOnErrorsPlugin，OccurrenceOrderPlugin，SideEffectsFlagPlugin，TeserPlug
 
 webpack 核心对象 Compiler 和 Compilation 都继承 Tapable，也就是说 webpack 的整个骨架是基于 Tapable 的。
 
-Tapable 是一个类似于 Node.js 的 EventEmitter 的库，主要是控制狗子函数的发布与订阅，控制着 webpack 的插件系统。
+Tapable 是一个类似于 Node.js 的 EventEmitter 的库，主要是控制勾子函数的发布与订阅，控制着 webpack 的插件系统。
 
 用一个例子简单展示一下 Tapable 的使用
 ```javascript
@@ -133,12 +133,14 @@ Tapable 是一个类似于 Node.js 的 EventEmitter 的库，主要是控制狗�
   const { transformFromAst } = require('babel-core')
   
   module.exports = {
+    // 获取 AST 树
     getAST: (path) => {
       const source = fs.readFileSync(path, 'utf-8');
       return babylon.parse(source, {
         sourceType: 'module'
       });
     },
+    // 获取依赖
     getDependencieds: (ast) => {
       const dependencies = [];
       traverse(ast, {
@@ -148,6 +150,7 @@ Tapable 是一个类似于 Node.js 的 EventEmitter 的库，主要是控制狗�
       })
       return dependencies;
     },
+    // 通过 AST 转换成源码
     trasform: (ast) => {
       const { code } = transformFromAst(ast, null, {
         presets: ['env']
@@ -163,17 +166,19 @@ Tapable 是一个类似于 Node.js 的 EventEmitter 的库，主要是控制狗�
   const { getAST, getDependencieds, trasform } = require('./parser');
   
   module.exports = class Compiler {
-  
     constructor(options) {
       const { entry, output } = options;
       this.entry = entry;
       this.output = output;
       this.modules = [];
     }
+
     run() {
+      // 获取 entry 编译模块
       const entryModule = this.buildModule(this.entry, true);
       this.modules.push(entryModule);
   
+      // 遍历依赖的模块
       this.modules.map((_module) => {
         _module.dependencies.map((dependency) => {
           this.modules.push(this.buildModule(dependency));
@@ -181,11 +186,14 @@ Tapable 是一个类似于 Node.js 的 EventEmitter 的库，主要是控制狗�
       })
     }
   
+    // 编译模块获取源码和依赖
     buildModule(filename, isEntry) {
       let ast;
+      // 如果是入口 entry 文件，传入的是全路径
       if (isEntry) {
         ast = getAST(filename);
       } else {
+        // 拼接绝对路径
         const absolutePath = path.join(process.cwd(), './src', filename)
         ast = getAST(absolutePath);
       }
@@ -202,10 +210,12 @@ Tapable 是一个类似于 Node.js 的 EventEmitter 的库，主要是控制狗�
 
 最后我们在 compiler.js 增加 emitFiles 方法
 ```javascript
+  // 生成文件
   emitFiles() {
     const outputPath = path.join(this.output.path, this.output.filename);
   
     let modules = '';
+    // key、value 形式整装 modules
     this.modules.map((_module) => {
       modules += `'${ _module.filename}': function (require, module, exports) { ${ _module.source} },`
     })
