@@ -1,5 +1,5 @@
 # canvas 基础之图像处理
-前些日子，前辈推荐了一个有趣的项目 —— [Real-Time-Person-Removal](https://github.com/jasonmayes/Real-Time-Person-Removal)，这个项目使用了 TensorFlow.js(https://www.tensorflow.org/)，以及 canvas 中的图像处理实现视频中的人物消失。借此机会，复习下 canvas 基础中的图像处理。
+前些日子，前辈推荐了一个有趣的项目 —— [Real-Time-Person-Removal](https://github.com/jasonmayes/Real-Time-Person-Removal)，这个项目使用了 [TensorFlow.js](https://www.tensorflow.org/)，以及 canvas 中的图像处理实现视频中的人物消失。借此机会，复习下 canvas 基础中的图像处理。
 
 ## 基础 API
 canvas 的图像处理能力通过 ImageData 对象来处理像素数据。主要的 API 如下：
@@ -18,7 +18,7 @@ width 是 canvas 画布的宽或者说 x 轴的像素数量；height 是画布�
 
 ## 对图片的处理
 下面，我们通过几个例子来看下 canvas 基础的图片处理能力。  
-原图效果：
+原图效果：  
 <img src="https://jinjiting.github.io/gob/mhcmb/issue3/origin.jpg" alt="原图效果">
 
 ```js
@@ -196,5 +196,5 @@ function generateWeightMatrix(radius = 1, sigma) { // sigma 正态分布的标�
 好了，上面就是一些基础的图像处理算法。
 
 ### 参考资料
-[高斯模糊的算法](http://www.ruanyifeng.com/blog/2012/11/gaussian_blur.html)
-[高斯模糊](https://zh.wikipedia.org/wiki/%E9%AB%98%E6%96%AF%E6%A8%A1%E7%B3%8A)
++ [高斯模糊的算法](http://www.ruanyifeng.com/blog/2012/11/gaussian_blur.html)  
++ [高斯模糊](https://zh.wikipedia.org/wiki/%E9%AB%98%E6%96%AF%E6%A8%A1%E7%B3%8A)
