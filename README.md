@@ -21,3 +21,8 @@
 | [javaScript中this用法原理详解](https://github.com/maihaoche/monthlyblog/blob/master/phase_2/javaScript%E4%B8%ADthis%E7%9A%84%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3_gangqiang_20200206.md) | [@刚强](https://github.com/wanggangqiang999) | 第 2 期 |
 | [写给 Web 端同事的一些iOS知识分享](https://github.com/maihaoche/monthlyblog/blob/master/phase_2/%E5%86%99%E7%BB%99%20Web%20%E7%AB%AF%E5%90%8C%E4%BA%8B%E7%9A%84%E4%B8%80%E4%BA%9BiOS%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB_huanyu_20200206.md) | [@寰宇](https://github.com/xtyHY) | 第 2 期 |
 | [从剖析 Koa 源码到简单实现](https://github.com/maihaoche/monthlyblog/blob/master/phase_2/%E4%BB%8E%E5%89%96%E6%9E%90%20Koa%20%E6%BA%90%E7%A0%81%E5%88%B0%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0_jinguo_20200205.md) | [@金果](https://github.com/jinguo) | 第 2 期 |
+| [前端鉴权知识学习](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/%E5%89%8D%E7%AB%AF%E9%89%B4%E6%9D%83%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0_jianhao_20200323.md) | [@剑豪](https://github.com/jianhao) | 第 3 期 |
+| [常见的函数组合](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%BD%E6%95%B0%E7%BB%84%E5%90%88_ziming_20200323.md) | [@子明](https://github.com/simonwong) | 第 3 期 |
+| [canvas 基础之图像处理](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/canvas%20%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86_jinjiting_20200323.md) | [@今集](https://github.com/JINJITING) | 第 3 期 |
+| [web安全](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/web%E5%AE%89%E5%85%A8_gangqiang_20200323.md) | [@刚强](https://github.com/wanggangqiang999) | 第 3 期 |
+| [浅谈webpack](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/%E6%B5%85%E8%B0%88webpack_jinguo_20200322.md) | [@金果](https://github.com/jinguo) | 第 3 期 |
