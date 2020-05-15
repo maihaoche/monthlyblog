@@ -5,7 +5,7 @@
 <a name="mdFt0"></a>
 ### 1. mac常用快捷键
 
-```bash
+```js
 Mac 和 Windows 按键对应关系
 control             ctrl
 option              Alt
@@ -82,7 +82,7 @@ mac 自带屏幕录制和截图工具，首先是 QuickTime player 这个软件�
 <a name="MMS7a"></a>
 ### 8. 自定义Launchpad图标
 MacLaunchpad里面系统默认的应用程序图标大小无法自定义，但是可以设置每行每列放几个图标，方法如下：
-```bash
+```js
 defaults write com.apple.dock springboard-rows -int 6					// 设置每页六行
 defaults write com.apple.dock springboard-columns -int 8			    // 设置每页八列
 killall Dock															// 关闭dock才能生效
@@ -109,7 +109,7 @@ killall Dock															// 关闭dock才能生效
 
 
 #### 2、nvm使用
-```bash
+```js
 1. 查看下当前可用的node版本
 $ nvm ls或者nvm list 
 
@@ -129,7 +129,7 @@ nvm unalias LTS              // 取消别名
 ```
 #### 3、设置默认node版本
 安装后要为shell设置一个默认node版本，不然每次打开都要use。
-```bash
+```js
 nvm alias default 10.15.3 或者 LTS    // 因为我为10.15.3设置了别名，所以用别名和版本都可以
 ```
 
@@ -139,9 +139,9 @@ nvm alias default 10.15.3 或者 LTS    // 因为我为10.15.3设置了别名，
 
 #### 1. 安装 GIt
 可以通过[官网下载](https://git-scm.com/download/mac)安装或者通过brew来安装，通过brew安装的话命令如下：
-```bash
+```js
 如果没有安装 homebrew
-$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 安装 Git
 brew install git
@@ -150,12 +150,12 @@ brew install git
 
 #### 2. 配置基础信息和 SSH
 Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址，加了--global即全局设置。 
-```bash
+```js
 $ git config --global user.name "jianhao"                       // 设置用户名
 $ git config --global user.email "jianXXXia@163.com"           // 设置邮箱
 ```
 因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你才能推送。 如果一台电脑分别往自己的 GitHub 和公司的 GitLab 推送代码的话，可以设置不同的公钥。
-```bash
+```js
 1、先在本地生成秘钥，如果关联多个github账号就生成多个秘钥
 ssh-keygen -t rsa -C "jianXXX@163.com" -f ~/.ssh/id_rsa
 ssh-keygen -t rsa -C "jianXXX@163.com" -f ~/.ssh/id_rsa_my
@@ -170,7 +170,7 @@ touch config       // 没有config文件可以在ssh目录下执行此命令生�
 // config文件配置如下：
 #gitlab one 买好车
 Host git.dXXX.net 				# 这里名称可以随意取，和下面那个Host的不一样就行
-HostName git.XXXu.net  		# 公司 gitlab 的域名
+HostName git.XXXu.net  		    # 公司 gitlab 的域名
 User git
 IdentityFile ~/.ssh/id_rsa
 
@@ -185,7 +185,7 @@ IdentityFile ~/.ssh/id_rsa_my
 ```
 #### 
 #### 3. Git 命令缩写
-```bash
+```js
 上面配置了 oh-my-zsh,所以可以使用 git 命令缩写来操作，缩写配置文件目录如下：
 ~/.oh-my-zsh/plugins/git/.git.plugin.zsh
 
@@ -217,7 +217,7 @@ gp     git push <远程主机名> <远程分支名>:<本地分支名>       // �
 ### 1. brew 和 brew cask
 > brew是一款Mac OS平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。brew 装的主要是 command line tool。brew cask装的大多是有gui界面的app以及[驱动](https://link.zhihu.com/?target=https%3A//github.com/caskroom/homebrew-drivers)，brew cask是brew的一个官方源。
 
-```bash
+```js
 # 安装homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -342,4 +342,4 @@ Command + K & Command + S 打开快捷键绑定可以看到所有的快捷键，
 - FeHelper                          JSON自动格式化、简易postman、时间戳转换...
 ```
 
-
+同学们有更多技巧可以在下方留言~
