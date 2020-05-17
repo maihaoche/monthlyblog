@@ -1,18 +1,19 @@
-## js深复制 VS 浅复制
+## js 深复制 VS 浅复制
 
-理解js深复制与浅复制，我们首先需要理解的概念有：堆，栈，数据类型，引用类型
+理解 js 深复制与浅复制，我们首先需要理解的概念有：堆，栈，数据类型，引用类型
 
 ### 堆与栈的特点
 
 堆：
+
 - 存储引用类型数据
 - 按引用访问
 - 存储空间动态分配
 - 无序存储，可以通过引用直接获取
 - 存储空间大，但是运行效率相对较低
 
+栈:
 
-栈: 
 - 存储基础数据类型
 - 按值访问
 - 存储空间固定
@@ -32,34 +33,35 @@
 
 ```
     var str = "abc";
-    
+
     console.log(str[1]="f");    // f
-    
+
     console.log(str);           // abc
-    
+
 ```
-可以看到，str的原始值并没有改变。它们只会返回一个新的字符串，原字符串的值并 不会改变。所以请记住，基本数据类型的值是不可改变的。
+
+可以看到，str 的原始值并没有改变。它们只会返回一个新的字符串，原字符串的值并 不会改变。所以请记住，基本数据类型的值是不可改变的。
 
 基本类型的比较是值的比较，只要它们的值相等就认为他们是相等的。
 
 比较的时候最好使用严格等，因为 == 是会进行类型转换的
+
 ```
     var a = 1;
     var b = 1;
     console.log(a === b);//true
-    
-    
+
+
     var a = 1;
     var b = "1";
     console.log(a === b);//false, 类型不同
-    
-    
+
+
     var a = 1;
     var b = true;
     console.log(a == b);//true，进行了类型转换
-    
-```
 
+```
 
 #### 引用类型：object
 
@@ -76,11 +78,12 @@ var person3 = {name:'xiaoq'};
 
 引用类型等值是可以改变的
 如：
+
 ```
     var a = [1,2,3];
     a[1] = 5;
     console.log(a[1]); // 5
-    
+
 ```
 
 引用类型的比较是引用的比较,所以每次我们对 js 中的引用类型进行操作的时候，都是操作其对象的引用（保存在栈内存中的指针），所以比较两个引用类型，是看其的引用是否指向同一个对象
@@ -89,7 +92,7 @@ var person3 = {name:'xiaoq'};
     var a = [1,2,3];
     var b = [1,2,3];
     console.log(a === b); // false
-    
+
 ```
 
 虽然变量 a 和变量 b 都是表示一个内容为 1，2，3 的数组，但是其在内存中的位置不一样，也就是说变量 a 和变量 b 指向的不是同一个对象，指向的不是同一处的堆内存空间。所以他们是不相等的。
@@ -114,6 +117,7 @@ console.log(b); // 10
 所以说，基本类型的赋值的两个变量是两个独立相互不影响的变量
 
 但是引用类型的赋值是传址。只是改变指针的指向，例如，也就是说引用类型的赋值是对象保存在栈中的地址的赋值，这样的话两个变量就指向同一个对象，因此两者之间操作互相有影响。例如
+
 ```
 var a = {}; // a保存了一个空对象的实例
 var b = a;  // a和b都指向了这个空对象
@@ -135,6 +139,7 @@ console.log(a == b);// true
 ### 浅拷贝
 
 有上面等知识基础后，对于理解浅拷贝就很容易了。请看如下例子,看看浅复制与直接赋值之间的区别：
+
 ```
 var obj1 = {
         'name' : 'zhangsan',
@@ -162,7 +167,7 @@ var obj1 = {
     obj2.language[1] = ["二","三"];
     obj3.language[2] = ["四","五"];
 
-    console.log(obj1);  
+    console.log(obj1);
     //obj1 = {
     //    'name' : 'lisi',
     //    'age' :  '18',
@@ -189,6 +194,7 @@ var obj1 = {
 然而，我们接下来来看一下改变引用类型会是什么情况呢，我又改变了赋值得到的对象 obj2 和浅拷贝得到的 obj3 中的 language 属性的第二个值和第三个值（language 是一个数组，也就是引用类型）。结果见输出，可以看出来，无论是修改赋值得到的对象 obj2 和浅拷贝得到的 obj3 都会改变原始数据。
 
 根据这段代码我们就可以知道：
+
 ```
     function shallowCopy(src) {
         var dst = {};
@@ -208,7 +214,9 @@ var obj1 = {
 ![image](https://img.maihaoche.com/DCCF2D44-0569-4E19-A2F2-75FF1145C4AF.jpg)
 
 ### 深复制
+
 深拷贝是对对象以及对象的所有子对象进行拷贝，我们只需把所有属于对象的属性类型都遍历赋给另一个对象即可。看如下代码：
+
 ```
    function deepClone(obj) {
         //如果不是复杂数据类型,就直接返回一个一样的对象
@@ -226,10 +234,90 @@ var obj1 = {
 
 这里主要使用了一个递归，如果子元素为对象类型，就继续浅拷贝。
 
+深拷贝优化版：
+
+```
+方案1：递归 + weakmap
+
+const deepClone = (value, hash = new WeakMap) => {
+  if(value == null) return value;
+  if(value instanceof RegExp) return new RegExp(value);
+  if(value instanceof Date) return new Date(value);
+  if(typeof value != 'object') return value;
+  let obj = new value.constructor();
+  console.log('hash值： ', hash, value, obj)
+
+  if(hash.get(value)){
+    return hash.get(value);
+  }
+  hash.set(value, obj);
+  for(var k in value) {
+    if(value.hasOwnProperty(k)){
+      console.log('基槽 ', k, value[k])
+      obj[k] = deepClone(value[k], hash);
+    }
+  }
+  return obj;
+}
+
+let a = {
+  m: 1,
+  n:{
+    x:12,
+    y:13
+  }
+}
+a.self = a;
+let b =  deepClone(a);
+b.n = 100;
+
+console.log(b); // {m: 1, n: 100}
+console.log(a); // {m: 1, n: {x: 12, y:13}}
+
+方案2：递归 + 数组去重
+function find(arr,item){
+  for(var i=0; i<arr.length; i++){
+    if(arr[i].source === item){
+      return arr[i]
+    }
+  }
+  return null;
+}
+
+function isObject(obj) {
+  return typeof obj === 'object' && obj != null;
+}
+
+function deepClone(source,uniqueList){
+  if(!isObject(source)) return source; // 是否是对象
+  if(!uniqueList) uniqueList = [];    //   初始化数据
+  var target = Array.isArray(source) ? [] : {}; // 看下要拷贝的是数组还是对象
+  var uniqueData = find(uniqueList,source);
+  if(uniqueData) return uniqueData.target;
+  uniqueList.push({
+    source:source,
+    target:target
+  });
+
+  for(var key in source){
+    if(Object.prototype.hasOwnProperty.call(source,key)){
+       target[key] = deepClone(source[key], uniqueList)      //   传入数组
+    }
+  }
+  return target;
+}
+
+const a = {
+  name:"key1",
+  eat:["苹果", "香蕉"]
+}
+
+a.d = a;
+b = deepClone(a);
+a.eat[2] = "桃";
+console.log('数据源', a);
+console.log(b)
+
+```
 
 至此是不是对浅拷贝，深拷贝有了清楚的认识呢。
-
-
-
-
-
