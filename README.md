@@ -26,3 +26,9 @@
 | [canvas 基础之图像处理](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/canvas%20%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86_jinjiting_20200323.md) | [@今集](https://github.com/JINJITING) | 第 3 期 |
 | [web安全](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/web%E5%AE%89%E5%85%A8_gangqiang_20200323.md) | [@刚强](https://github.com/wanggangqiang999) | 第 3 期 |
 | [浅谈webpack](https://github.com/maihaoche/monthlyblog/blob/master/phase_3/%E6%B5%85%E8%B0%88webpack_jinguo_20200322.md) | [@金果](https://github.com/jinguo) | 第 3 期 |
+| [Mac 前端开发环境从零配置](https://github.com/maihaoche/monthlyblog/blob/master/phase_4/Mac%20%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE_jianhao_20200510.md) | [@剑豪](https://github.com/jianhao) | 第 4 期 |
+| [npm多版本包依赖问题探讨](https://github.com/maihaoche/monthlyblog/blob/master/phase_4/npm%E5%A4%9A%E7%89%88%E6%9C%AC%E5%8C%85%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%E6%8E%A2%E8%AE%A8_ziming_20200510.md) | [@子明](https://github.com/simonwong) | 第 4 期 |
+| [JS压缩图片简易实现](https://github.com/maihaoche/monthlyblog/blob/master/phase_4/JS%E5%8E%8B%E7%BC%A9%E5%9B%BE%E7%89%87%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0_huanyu_20200506.md) | [@寰宇](https://github.com/xtyHY) | 第 4 期 |
+| [Vue 项目优化技巧](https://github.com/maihaoche/monthlyblog/blob/master/phase_4/useVueGracefully_qiming_20200506.md) | [@齐铭](https://github.com/qiming520) | 第 4 期 |
+| [js 深复制 VS 浅复制](https://github.com/maihaoche/monthlyblog/blob/master/phase_4/js%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D_gangqiang_20200511.md) | [@刚强](https://github.com/wanggangqiang999) | 第 4 期 |
+| [浅谈V8引擎](https://github.com/maihaoche/monthlyblog/blob/master/phase_4/%E6%B5%85%E8%B0%88V8%E5%BC%95%E6%93%8E_jinguo_20200505.md) | [@金果](https://github.com/jinguo) | 第 4 期 |
